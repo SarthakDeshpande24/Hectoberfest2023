@@ -1,0 +1,29 @@
+def sieve_eratosthenes(limit):
+    # Create a boolean list "prime[0..limit]" and initialize all entries to True
+    prime = [True] * (limit + 1)
+    p = 2
+    while p**2 <= limit:
+        # If prime[p] is not changed, it is a prime
+        if prime[p] is True:
+            # Update all multiples of p
+            for i in range(p**2, limit + 1, p):
+                prime[i] = False
+        p += 1
+
+    # Collect the prime numbers into a list
+    primes = [p for p in range(2, limit + 1) if prime[p]]
+
+    return primes
+
+# Define the range for finding prime numbers
+lower_limit = 10
+upper_limit = 50
+
+# Find prime numbers in the specified range
+prime_numbers = sieve_eratosthenes(upper_limit)
+
+# Filter the prime numbers in the given range
+prime_numbers_in_range = [p for p in prime_numbers if p >= lower_limit]
+
+# Print the prime numbers in the specified range
+print("Prime numbers in the range [{}, {}]: {}".format(lower_limit, upper_limit, prime_numbers_in_range))
