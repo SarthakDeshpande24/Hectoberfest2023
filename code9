@@ -1,0 +1,31 @@
+def eratosthenes_sieve(limit):
+    # Create a list of booleans to track prime numbers up to the given limit
+    is_prime = [True] * (limit + 1)
+    
+    # Initialize the current prime number as 2
+    current_prime = 2
+    while current_prime**2 <= limit:
+        # If the current number is marked as prime, it is indeed a prime number
+        if is_prime[current_prime]:
+            # Mark all multiples of the current prime as non-prime
+            for num in range(current_prime**2, limit + 1, current_prime):
+                is_prime[num] = False
+        current_prime += 1
+
+    # Collect the prime numbers into a list
+    prime_numbers = [num for num, isprime in enumerate(is_prime) if isprime and num >= 2]
+
+    return prime_numbers
+
+# Define the range for finding prime numbers
+start_range = 10
+end_range = 50
+
+# Find prime numbers in the specified range using the eratosthenes_sieve function
+primes_list = eratosthenes_sieve(end_range)
+
+# Filter the prime numbers within the given range
+prime_numbers_in_range = [p for p in primes_list if p >= start_range]
+
+# Print the prime numbers in the specified range
+print("Prime numbers in the range [{}, {}]: {}".format(start_range, end_range, prime_numbers_in_range))
